@@ -20,7 +20,7 @@ func main() {
 	})
 
 	for i := 0; i < 10; i++ {
-		time.Sleep(time.Second)
+		time.Sleep(2 * time.Second)
 		fmt.Printf("<== published msg %d\n", i)
 		err := rclient.Publish(ctx, "chan1", fmt.Sprintf("payload-%d", i)).Err()
 		if err != nil {
