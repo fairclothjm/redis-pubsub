@@ -8,8 +8,8 @@ import (
 )
 
 type Result struct {
-	id          int
-	provisioned bool
+	ID          int
+	Provisioned bool
 }
 
 var mockResponses = []int{
@@ -30,7 +30,7 @@ func provisionNewResource() int {
 	return doMockAPICall()
 }
 
-func worker(id int, jobs <-chan int, results chan<- Result) {
+func Worker(id int, jobs <-chan int, results chan<- Result) {
 	for j := range jobs {
 		fmt.Println("worker", id, "started job", j)
 		resp := provisionNewResource()

@@ -5,7 +5,6 @@ import (
 	"fmt"
 	w "github.com/fairclothjm/redis-pubsub/pkg/worker"
 	"github.com/go-redis/redis/v8"
-	"time"
 )
 
 // root context
@@ -22,7 +21,7 @@ func main() {
 
 	const jobCount = 20
 	jobs := make(chan int, jobCount)
-	results := make(chan Result, jobCount)
+	results := make(chan w.Result, jobCount)
 
 	// start 5 workers
 	for i := 1; i <= 3; i++ {
