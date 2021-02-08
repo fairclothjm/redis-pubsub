@@ -1,7 +1,7 @@
 package worker
 
 import (
-	"fmt"
+	"log"
 	"math/rand"
 	"net/http"
 	"time"
@@ -30,9 +30,11 @@ func provisionNewResource() int {
 	return doMockAPICall()
 }
 
+// Worker attempts to provision a new resource for each job and
+// writes the results of the privision call to the results chan.
 func Worker(id int, jobs <-chan int, results chan<- Result) {
 	for j := range jobs {
-		fmt.Println("worker", id, "started job", j)
+		log.Println("worker", id, "started job", j)
 		resp := provisionNewResource()
 
 		provisioned := false
@@ -40,7 +42,7 @@ func Worker(id int, jobs <-chan int, results chan<- Result) {
 			provisioned = true
 		}
 
-		results <- Result{id: j, provisioned: provisioned}
-		fmt.Println("worker", id, "finished job", j)
+		results <- Result{ID: j, Provisioned: provisioned}
+		log.Println("worker", id, "finished job", j)
 	}
 }

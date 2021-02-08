@@ -2,15 +2,15 @@ package main
 
 import (
 	"context"
-	"fmt"
 	"github.com/go-redis/redis/v8"
+	"log"
 )
 
 // root context
 var ctx = context.Background()
 
 func main() {
-	fmt.Println("init sub")
+	log.Println("init sub")
 
 	rclient := redis.NewClient(&redis.Options{
 		Addr:     "redis:6379",
@@ -19,11 +19,10 @@ func main() {
 	})
 
 	pubsub := rclient.Subscribe(ctx, "chan1")
-	fmt.Println("subscribed to chan1")
+	log.Println("subscribed to chan1")
 
 	ch := pubsub.Channel()
 	for msg := range ch {
-		fmt.Println("==> receiving msg")
-		fmt.Println(msg.Channel, msg.Payload)
+		log.Println("==> receiving msg", msg.Channel, msg.Payload)
 	}
 }
