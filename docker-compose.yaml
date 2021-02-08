@@ -11,16 +11,16 @@ services:
 
   pub:
     build:
-      context: ./pub
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: ./cmd/pub/Dockerfile
     depends_on:
       - redis
     networks:
       - pubsub
   sub:
     build:
-      context: ./sub
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: ./cmd/sub/Dockerfile
     depends_on:
       - redis
       - pub
