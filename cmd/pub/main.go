@@ -56,7 +56,7 @@ func main() {
 			log.Printf("add provisioned resource with ID %d to cache", r.ID)
 		} else {
 			log.Printf("failure for %d, send alert", r.ID)
-			err := rclient.Publish(ctx, "chan1", fmt.Sprintf("payload-%d", r.ID)).Err()
+			err := rclient.Publish(ctx, "chan_provision_failure", fmt.Sprintf("payload-%d", r.ID)).Err()
 			if err != nil {
 				panic(err)
 			}

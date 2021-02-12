@@ -18,8 +18,8 @@ func main() {
 		DB:       0,
 	})
 
-	pubsub := rclient.Subscribe(ctx, "chan1")
-	log.Println("subscribed to chan1")
+	pubsub := rclient.Subscribe(ctx, "chan_provision_failure")
+	log.Println("subscribed to chan_provision_failure")
 
 	ch := pubsub.Channel()
 	for msg := range ch {
