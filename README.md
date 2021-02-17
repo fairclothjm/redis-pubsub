@@ -50,6 +50,7 @@ sub_1    | 2021/02/12 04:01:45 ==> receiving msg chan_provision_failure payload-
 - lacking unit tests
   - would require refactoring to simplify unit testing
 - integration tests
+- need to gracefully handle panics
 
 ### More considerations
 - How might this project be scaled?

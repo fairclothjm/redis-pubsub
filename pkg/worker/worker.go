@@ -7,6 +7,7 @@ import (
 	"time"
 )
 
+// Result is the data type for a provisioned resource.
 type Result struct {
 	ID          int
 	Provisioned bool
@@ -26,6 +27,8 @@ func doMockAPICall() int {
 	return mockResponses[n]
 }
 
+// provisionNewResource will attempt to "privision" a new resource by
+// calling a mock API function
 func provisionNewResource() int {
 	return doMockAPICall()
 }

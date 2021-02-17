@@ -40,23 +40,23 @@ func main() {
 	// collect results
 	// alternatively, use waitgroup?
 	for i := 1; i <= jobCount; i++ {
-		r := <-results
-		log.Printf("%+v\n", r)
+		result := <-results
+		log.Printf("%+v\n", result)
 
-		if r.Provisioned {
-			marshalValue, err := json.Marshal(r)
+		if result.Provisioned {
+			marshalValue, err := json.Marshal(result)
 			if err != nil {
 				panic(err)
 			}
 
-			err = rclient.Set(ctx, strconv.Itoa(r.ID), marshalValue, 0).Err()
+			err = rclient.Set(ctx, strconv.Itoa(result.ID), marshalValue, 0).Err()
 			if err != nil {
 				panic(err)
 			}
-			log.Printf("add provisioned resource with ID %d to cache", r.ID)
+			log.Printf("add provisioned resource with ID %d to cache", result.ID)
 		} else {
-			log.Printf("failure for %d, send alert", r.ID)
-			err := rclient.Publish(ctx, "chan_provision_failure", fmt.Sprintf("payload-%d", r.ID)).Err()
+			log.Printf("failure for %d, send alert", result.ID)
+			err := rclient.Publish(ctx, "chan_provision_failure", fmt.Sprintf("payload-%d", result.ID)).Err()
 			if err != nil {
 				panic(err)
 			}
