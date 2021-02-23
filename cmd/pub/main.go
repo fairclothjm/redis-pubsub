@@ -36,6 +36,7 @@ func main() {
 	for j := 1; j <= jobCount; j++ {
 		jobs <- j
 	}
+	close(jobs)
 
 	// collect results
 	// alternatively, use waitgroup?
